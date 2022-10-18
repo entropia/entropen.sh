@@ -17,3 +17,7 @@ MATRIX_ROOM_ID=intern_room_id
 ./entrope.sh
 ```
 
+## Resources
+
+- [Clinet-Server-API with curl](https://www.matrix.org/docs/guides/client-server-api)
+
