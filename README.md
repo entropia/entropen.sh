@@ -14,5 +14,6 @@ information:
 MATRIX_PROVIDER=https://matrix.org
 MATRIX_ACCESS_TOKEN=your_token
 MATRIX_ROOM_ID=intern_room_id
-./entropen
+./entrope.sh
 ```
+
