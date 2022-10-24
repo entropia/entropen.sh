@@ -19,5 +19,5 @@ MATRIX_ROOM_ID=intern_room_id
 
 ## Resources
 
-- [Clinet-Server-API with curl](https://www.matrix.org/docs/guides/client-server-api)
+- [Client-Server-API with curl](https://www.matrix.org/docs/guides/client-server-api)
 
