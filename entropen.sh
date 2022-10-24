@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -z "$MATRIX_PROVIDER" ] || [ -z "$MATRIX_ACCESS_TOKEN" ] || [ -z "$MATRIX_ROOM_ID" ]
 then
     echo 'env vars $MATRIX_PROVIDER or $MATRIX_ACCESS_TOKEN or $MATRIX_ROOM_ID not set'
