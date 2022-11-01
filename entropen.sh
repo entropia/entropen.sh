@@ -1,5 +1,7 @@
-#!/bin/bash
-if [ -z "$MATRIX_PROVIDER" ] || [ -z "$MATRIX_ACCESS_TOKEN" ] || [ -z "$MATRIX_ROOM_ID" ]
+#!/bin/sh
+if  [ -z "$MATRIX_PROVIDER" ] || 
+    [ -z "$MATRIX_ACCESS_TOKEN" ] || 
+    [ -z "$MATRIX_ROOM_ID" ]
 then
     echo 'env vars $MATRIX_PROVIDER or $MATRIX_ACCESS_TOKEN or $MATRIX_ROOM_ID not set'
     exit -1
@@ -20,6 +22,6 @@ do
         curl -XPUT -d "{\"topic\": \"$update\"}" \
             "$provider/_matrix/client/r0/rooms/$room/state/m.room.topic?access_token=$token"
     fi
-    sleep 10
+    sleep 300
 done
 
