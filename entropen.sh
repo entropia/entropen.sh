@@ -15,7 +15,7 @@ status=false
 
 while true
 do 
-    update="$(curl https://club.entropia.de/spaceapi | jq -r 'if .state.open then "Offen" else "Geschlossen" end')"
+    update="$(curl https://club.entropia.de/spaceapi | jq -r 'if .state.open then "Clubräume geöffnet" else "Clubräume geschlossen" end')"
     if [ "$update" != "$status" ]
     then 
         status="$update"
