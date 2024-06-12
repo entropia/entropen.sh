@@ -11,17 +11,27 @@ provider="$MATRIX_PROVIDER"
 token="$MATRIX_ACCESS_TOKEN"
 room="$MATRIX_ROOM_ID"
 
-status=false
-
-while true
-do 
-    update="$(curl https://club.entropia.de/spaceapi | jq -r 'if .state.open then "Clubräume geöffnet" else "Clubräume geschlossen" end')"
-    if [ "$update" != "$status" ]
-    then 
-        status="$update"
-        curl -XPUT -d "{\"topic\": \"$update\"}" \
-            "$provider/_matrix/client/r0/rooms/$room/state/m.room.topic?access_token=$token"
-    fi
-    sleep 300
-done
-
+previous_status="?"
+mosquitto_sub -h mqtt.club.entropia.de -t /public/eden/clubstatus |
+    while read update ; do
+        if [ "$update" != "$previous_status" ]
+        then 
+            previous_status="$update"
+            message="Club status unknown"
+            if [ "$update" = "1" ] ; then
+              message="Club is now open"
+            fi
+            if [ "$update" = "0" ] ; then
+              message="Club is now closed"
+            fi
+            curl -XPUT -d "{\"topic\": \"$message\"}" \
+                "$provider/_matrix/client/r0/rooms/$room/state/m.room.topic?access_token=$token"
+            curl \
+                -H "Title: Entropia status updates" \
+                -H "Priority: low" \
+                -H "Tags: wave" \
+                -H "Icon: https://entropia.de/images/d/d0/Entropia_Transparent_Farbe_HighRes.png" \
+                -d "$message" \
+                ntfy.sh/entropia
+        fi
+    done
