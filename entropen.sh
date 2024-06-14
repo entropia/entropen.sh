@@ -12,7 +12,7 @@ token="$MATRIX_ACCESS_TOKEN"
 room="$MATRIX_ROOM_ID"
 
 previous_status="?"
-mosquitto_sub -h mqtt.club.entropia.de -t /public/eden/clubstatus |
+mosquitto_sub -h mqtt.club.entropia.de -t /public/eden/clubstatus -q 2 -I status-bot |
     while read update ; do
         if [ "$update" != "$previous_status" ]
         then 
